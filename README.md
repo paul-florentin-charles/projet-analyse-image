@@ -1,3 +1,2 @@
-# Projet Analyse Image
-
-Segmentation and classification for cells + GUI
+# Run
+`./process.sh images/<imgname.tif>`
