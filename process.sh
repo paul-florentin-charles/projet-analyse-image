@@ -77,17 +77,19 @@ eog 'contoured_'$name
 labname="labeled_"$name
 colname="colored_"$name
 
+
 echo -e '\nLabeling of the components'
 ./labeling-color $name $labname $colname
 eog $labname
 eog $colname
+
 
 echo -e '\nFiltering'
 ./filter $labname 'filtered_'$labname
 name='filtered_'$labname
 eog $name
 
-echo -e '\nFinally, another labeling of the components'
+echo -e '\nFinally, labeling the components'
 ./labeling-color $name $labname $colname
 eog $labname
 eog $colname
