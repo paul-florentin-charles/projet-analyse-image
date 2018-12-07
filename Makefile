@@ -4,7 +4,8 @@ LDFLAGS = -Wl,-R/opt/opencv/lib -L/opt/opencv/lib
 LDLIBS = \
 	-lopencv_core\
 	-lopencv_imgproc\
-	-lopencv_highgui
+	-lopencv_highgui\
+	-lopencv_ml
 
 BIN = \
 	labeling-color\
@@ -13,10 +14,18 @@ BIN = \
 	otsu\
 	contours\
 	filter\
+	classify\
+	segment\
+	#distance\
+	#skeleton\
+	#morphology\
+	#make-se\
 	#components
 
 .PHONY: all
 all: $(BIN)
+
+#$(BIN): morphology.o
 
 .PHONY: clean
 clean:
