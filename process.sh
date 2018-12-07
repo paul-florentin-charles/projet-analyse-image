@@ -48,6 +48,8 @@ fi
 
 name=$type"_"$(basename -- $1)
 
+## Conversion ##
+
 ./convert $1 $name $cvt_type
 eog $name
 
@@ -61,14 +63,20 @@ do
   read -p '$ Number of clusters : ' n_clusters
 done
 
+## Kmeans ##
+
 ./kmeans $n_clusters $name "kmeaned_"$name
 name="kmeaned_"$name
 eog $name
+
+## Otsu ##
 
 echo -e '\nWe will proceed to apply otsu to this image'
 ./otsu $name "otsu_"$name
 name="otsu_"$name
 eog $name
+
+## Contour detection ##
 
 echo -e '\nLet'\''s apply contour detection'
 ./contours $name 'contoured_'$name
@@ -77,19 +85,23 @@ eog 'contoured_'$name
 labname="labeled_"$name
 colname="colored_"$name
 
+## First labeling ##
 
 echo -e '\nLabeling of the components'
 ./labeling-color $name $labname $colname
 eog $labname
 eog $colname
 
+## Filtering ##
 
 echo -e '\nFiltering'
 ./filter $labname 'filtered_'$labname
 name='filtered_'$labname
 eog $name
 
-echo -e '\nFinally, labeling the components'
+## Second labeling ##
+
+echo -e '\nFinally, another labeling of the components'
 ./labeling-color $name $labname $colname
 eog $labname
 eog $colname
